@@ -16,8 +16,8 @@ userRouter.post("/api/register", (req, res) => {
             let userDataObj = new UserModel(userData)
             userDataObj.save()
             .then((newUser) => {
-                console.log("Sucessfully registered user.")
-                return res.status(201).send(newUser)
+                console.log("Sucessfully registered user: ", newUser)
+                return res.status(201).send({message: "Sucessfully registered user."})
             }).catch((err) => {
                 console.log("ERROR: Error saving user to database: ", err)
                 return res.status(500).send({message: "Error saving user to database."})
@@ -36,7 +36,7 @@ userRouter.post("/api/login", (req, res) => {
     .then((existingUser) => {
         if(existingUser){
             console.log("Login successful.")
-            return res.status(200).send({existingUser})
+            return res.status(200).send(existingUser)
         }
         else{
             console.log("ERROR: Invalid credentials.")
