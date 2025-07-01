@@ -13,7 +13,8 @@ let userSchema = new schemaObj({
     address: {type: String, required: true},
     gender: {type: String, required: true},
     diseaseInfo: {type: String, required: true},
-    medicalCertificate: {type: String, required: true}
+    medicalCertificate: {type: String, required: true},
+    role: {type: String, required: true}
 },
 {
     versionKey: false
