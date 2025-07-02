@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
 import { configureStore } from '@reduxjs/toolkit';
+import userReducer from "./user/UserSlice"
 
 let rootReducer = combineReducers({
-
+  user: userReducer
 })
 
 function logger({ getState }) {
@@ -19,6 +20,4 @@ function logger({ getState }) {
 export default configureStore({
     reducer : rootReducer,
     middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
-},
-{},//Initial state, if set from store instead of reducer
-)
+})
