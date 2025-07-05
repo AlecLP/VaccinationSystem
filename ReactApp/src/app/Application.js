@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {Navigate} from "react-router-dom"
 import Header from "./common-components/Header"
 import Footer from "./common-components/Footer"
 import Home from "./common-components/Home"
@@ -14,14 +15,16 @@ export default class ApplicationComponent extends Component {
     render(){
         return(
             <Router>
-                <div className="topdiv">
-                    <Header />
-                        <Routes >
-                            <Route path="/" element={<Home />}/>
-                            <Route path="/home" element={<Home />}/>
-                            <Route path="/register" element={<Register />}/>
-                            <Route path="/login" element={<Login />}/>
-                        </Routes>
+                <div className="font-sans">
+                    <Header/>
+                        <div className="px-5">
+                            <Routes >
+                                <Route path="/" element={<Navigate to="/home" replace />}/>
+                                <Route path="/home" element={<Home />}/>
+                                <Route path="/register" element={<Register />}/>
+                                <Route path="/login" element={<Login />}/>
+                            </Routes>
+                        </div>
                     <Footer />
                 </div>
             </Router>

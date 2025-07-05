@@ -13,17 +13,31 @@ let Header = (props) => {
         dispatch(logout())
         navigate("/login")
     }
+    const handleLogin = (e) => {
+        navigate("/login")
+    }
 
     return(
-        <>
-            <h1>Header</h1>
-            <NavLink to="/home" className="btn btn-primary">Home</NavLink> 
-            {!user ? 
-                <NavLink to="/login" className="btn btn-primary">Login</NavLink> 
-                :
-                <button className="btn btn-primary" onClick={()=>handleLogout()}>Logout</button>
-            }
-        </>
+        <div className="relative h-20 w-full flex items-center justify-between px-15">
+            <div className="flex font-semibold text-3xl">
+                <p className="text-red-700">Vaccination</p>
+                <p>System</p>
+            </div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 text-lg">
+                <NavLink to="/home">Home</NavLink>
+            </div>
+            <div className="text-lg">
+                {!user ? 
+                    <button className="px-4 py-1 border border-gray-500 text-gray-700 rounded-xl ring-1 ring-neutral-500/0 ring-offest-0
+                     hover:ring-blue-500 hover:border-blue-500 transition duration-200 cursor-pointer" onClick={()=>handleLogin()}>
+                        Login</button>
+                    :
+                    <button className="px-4 py-1 border border-gray-500 text-gray-700 rounded-xl ring-1 ring-neutral-500/0 ring-offest-0
+                     hover:ring-red-500 hover:border-red-500 transition duration-200 cursor-pointer" onClick={()=>handleLogout()}>
+                        Logout</button>
+                }
+            </div>
+        </div>
     )
 }
 
