@@ -47,7 +47,7 @@ const Register = () => {
                 name="username"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Username
@@ -59,7 +59,7 @@ const Register = () => {
                 type="password"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Password
@@ -70,7 +70,7 @@ const Register = () => {
                 name="firstName"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 First Name
@@ -81,7 +81,7 @@ const Register = () => {
                 name="lastName"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Last Name
@@ -92,7 +92,7 @@ const Register = () => {
                 name="dateOfBirth"
                 type="date"
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-2 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Date of Birth
@@ -105,7 +105,7 @@ const Register = () => {
                 min="1"
                 max="150"
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Age
@@ -116,7 +116,7 @@ const Register = () => {
                 name="profession"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Profession
@@ -128,7 +128,7 @@ const Register = () => {
                 type="number"
                 maxLength={10}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer
                            appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
@@ -140,7 +140,7 @@ const Register = () => {
                 name="address"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Address
@@ -151,7 +151,7 @@ const Register = () => {
                 name="gender"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Gender
@@ -162,7 +162,7 @@ const Register = () => {
                 name="diseaseInfo"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Disease Information
@@ -173,7 +173,7 @@ const Register = () => {
                 name="medicalCertificate"
                 maxLength={50}
                 required
-                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full peer"
+                className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
               />
               <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                 Medical Certificate

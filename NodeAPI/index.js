@@ -12,11 +12,15 @@ app.use(express.json({limit: "2mb", extended: false}))
 //======================================================
 const userApp = express()
 const userRoute = require("./route/UserRoute")
+const vaccineApp = express()
+const vaccineRoute = require("./route/VaccineRoute")
 
 //Using Apps and Routes
 //======================================================
 app.use("/user", userApp)
 userApp.use("/", userRoute)
+app.use("/vaccine", vaccineApp)
+vaccineApp.use("/", vaccineRoute)
 
 const port = 9000
 console.log("REST API is listening on port: ", port)

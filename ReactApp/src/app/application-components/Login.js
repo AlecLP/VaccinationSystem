@@ -18,7 +18,7 @@ const Login = () => {
 
     try {
       const result = await dispatch(loginUser(loginData)).unwrap();
-      console.log("Login success: ", result.message)
+      console.log("Login success")
       navigate("/home");
     } catch (err) {
       console.log("Login failed: ", err.message)
@@ -53,14 +53,14 @@ const Login = () => {
               placeholder="Username"
               maxLength={20}
               required
-              className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"
             />
             <input
               name="password"
               type="password"
               placeholder="Password"
               required
-              className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150"
             />
             <button
               type="submit"
