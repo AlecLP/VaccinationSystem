@@ -20,8 +20,8 @@ let Header = (props) => {
     return(
         <div className="relative h-20 w-full flex items-center justify-between px-15">
             <div className="flex font-semibold text-3xl">
-                <p className="text-red-700">Vaccination</p>
-                <p>System</p>
+                <p className="text-red-700">Immuno</p>
+                <p>Suite</p>
             </div>
             <div className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 text-lg">
                 <NavLink to="/home">Home</NavLink>
