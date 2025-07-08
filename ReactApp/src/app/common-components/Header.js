@@ -25,7 +25,13 @@ let Header = (props) => {
             </div>
             <div className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 text-lg">
                 <NavLink to="/home">Home</NavLink>
-                {user && user.role === "ADMIN" ? <NavLink to="/vaccines">Vaccines</NavLink> : <></>}
+                {user && user.role === "ADMIN" ? 
+                <>
+                    <NavLink to="/vaccines">Vaccines</NavLink> 
+                    <NavLink to="hospital">Hospital</NavLink>
+                </>
+                : 
+                <></>}
             </div>
             <div className="text-lg">
                 {!user ? 

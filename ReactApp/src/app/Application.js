@@ -7,6 +7,7 @@ import Home from "./common-components/Home"
 import Register from "./application-components/Register"
 import Login from "./application-components/Login"
 import Vaccine from "./application-components/vaccine/Vaccine"
+import Hospital from "./application-components/hospital/Hospital"
 
 export default class ApplicationComponent extends Component {
     constructor(props){
@@ -25,6 +26,7 @@ export default class ApplicationComponent extends Component {
                                 <Route path="/register" element={<Register />}/>
                                 <Route path="/login" element={<Login />}/>
                                 <Route path="/vaccines" element={<Vaccine />}/>
+                                <Route path="/hospital" element={<Hospital />}/>
                             </Routes>
                         </div>
                     <Footer />

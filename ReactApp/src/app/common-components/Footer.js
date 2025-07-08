@@ -16,13 +16,13 @@ let Footer = (props) => {
             {/* Contact */}
             <div className="text-left mx-auto w-max">
                 <h3 className="font-semibold text-lg mb-2">Contact</h3>
-                <p>Email: support@vaccinesystem.com</p>
+                <p>Email: support@immunosuite.com</p>
                 <p>Phone: +1 (972) 555-0100</p>
             </div>
         </div>
 
         <div className="text-center text-red-200 text-xs mt-10">
-            &copy; {new Date().getFullYear()} Vaccination System. All rights reserved.
+            &copy; {new Date().getFullYear()} ImmunoSuite. All rights reserved.
         </div>
         </footer>
     )

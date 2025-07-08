@@ -63,11 +63,11 @@ const hospitalSlice = createSlice({
         .addCase(getHospitals.pending, (state) => {
             state.getLoading = true;
             state.getError = null;
-            state.vaccines = null;
+            state.hospitals = null;
         })
         .addCase(getHospitals.fulfilled, (state, action) => {
             state.getLoading = false;
-            state.vaccines = action.payload;
+            state.hospitals = action.payload;
         })
         .addCase(getHospitals.rejected, (state, action) => {
             state.getLoading = false;
