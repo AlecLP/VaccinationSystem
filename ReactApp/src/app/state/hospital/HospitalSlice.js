@@ -44,7 +44,7 @@ const hospitalSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-        // Register Vaccine
+        // Register Hospital
         .addCase(registerHospital.pending, (state) => {
             state.registerLoading = true
             state.registerError = null
@@ -59,7 +59,7 @@ const hospitalSlice = createSlice({
             state.registerError = action.payload.message;
         })
 
-        // Get Vaccines
+        // Get Hospital
         .addCase(getHospitals.pending, (state) => {
             state.getLoading = true;
             state.getError = null;

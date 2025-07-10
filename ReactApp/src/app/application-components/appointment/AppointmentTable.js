@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getHospitals } from "../../state/hospital/HospitalSlice"
-import HospitalForm from "./HospitalForm"
+import { getAppointments } from "../../state/appointment/AppointmentSlice"
+import AppointmentForm from "./AppointmentForm"
 
-const HospitalTable = () => {
+const AppointmentTable = () => {
 
     const dispatch = useDispatch()
-    const { hospitals, getLoading, getError, getMessage } = useSelector((state) => state.hospitals)
+    const { appointments, getLoading, getError, getMessage } = useSelector((state) => state.appointments)
     const [showForm, setShowForm] = useState(false);
 
     const toggleForm = () => {
@@ -14,16 +14,16 @@ const HospitalTable = () => {
     };
 
     useEffect(() => {
-        if(hospitals === null){
-            dispatch(getHospitals())
-            console.log("Hospitals: ", hospitals)
+        if(appointments === null){
+            dispatch(getAppointments())
+            console.log("Appointments: ", appointments)
         }
-    }, [hospitals, dispatch])
+    }, [appointments, dispatch])
 
     return(
         <div className="w-full rounded-3xl overflow-hidden shadow-md mx-7">
             <div className="bg-red-700 text-white text-center py-4">
-                <h2 className="text-2xl font-semibold">Hospitals</h2>
+                <h2 className="text-2xl font-semibold">Appointments</h2>
             </div>
 
             <div className="bg-white px-8 py-4 pb-8">
@@ -38,34 +38,42 @@ const HospitalTable = () => {
                         onClick={toggleForm}
                         className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl transition"
                     >
-                        {showForm ? "Cancel" : "Register Hospital"}
+                        {showForm ? "Cancel" : "Schedule Appointment"}
                     </button>
                 </div>
 
                 {showForm && (
                 <div className="mb-6 border border-gray-300 rounded-xl p-4 bg-gray-50">
-                    <HospitalForm/>
+                    <AppointmentForm/>
                 </div>
                 )}
 
-                {hospitals && hospitals.length > 0 ? (
+                {appointments && appointments.length > 0 ? (
                 <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
                         <thead className="bg-gray-100 text-gray-700">
                             <tr>
-                            <th className="px-4 py-3">Name</th>
-                            <th className="px-4 py-3">Address</th>
-                            <th className="px-4 py-3">Type</th>
+                            <th className="px-4 py-3">Approver</th>
+                            <th className="px-4 py-3">Patient</th>
+                            <th className="px-4 py-3">Hospital</th>
+                            <th className="px-4 py-3">Vaccine</th>
+                            <th className="px-4 py-3">Doses</th>
+                            <th className="px-4 py-3">Date</th>
                             <th className="px-4 py-3">Charges ($)</th>
+                            <th className="px-4 py-3">Paid</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {hospitals.map((hospital, idx) => (
+                            {appointments.map((appointment, idx) => (
                             <tr key={idx} className="hover:bg-gray-50">
-                                <td className="px-4 py-3">{hospital.name}</td>
-                                <td className="px-4 py-3">{hospital.address}</td>
-                                <td className="px-4 py-3">{hospital.type}</td>
-                                <td className="px-4 py-3">${hospital.charges.toFixed(2)}</td>
+                                <td className="px-4 py-3">{appointment.approver}</td>
+                                <td className="px-4 py-3">{appointment.patient}</td>
+                                <td className="px-4 py-3">{appointment.hospital}</td>
+                                <td className="px-4 py-3">{appointment.vaccine}</td>
+                                <td className="px-4 py-3">{appointment.doses}</td>
+                                <td className="px-4 py-3">{appointment.appointmentDate}</td>
+                                <td className="px-4 py-3">${appointment.charge.toFixed(2)}</td>
+                                <td className="px-4 py-3">{appointment.isPaid ? "Yes" : "No"}</td>
                             </tr>
                             ))}
                         </tbody>
@@ -73,7 +81,7 @@ const HospitalTable = () => {
                 </div>
                 ) : (
                 !getLoading && (
-                    <p className="text-center text-gray-500 mt-4">No hospitals available.</p>
+                    <p className="text-center text-gray-500 mt-4">No appointments available.</p>
                 )
                 )}
             </div>
@@ -82,4 +90,4 @@ const HospitalTable = () => {
 
 }
 
-export default HospitalTable
+export default AppointmentTable

@@ -3,11 +3,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from "./user/UserSlice"
 import vaccineReducer from "./vaccine/VaccineSlice"
 import hospitalReducer from "./hospital/HospitalSlice"
+import appointmentReducer from "./appointment/AppointmentSlice"
 
 let rootReducer = combineReducers({
   user: userReducer,
   vaccines: vaccineReducer,
   hospitals: hospitalReducer,
+  appointments: appointmentReducer,
 })
 
 function logger({ getState }) {

@@ -48,4 +48,17 @@ userRouter.post("/api/login", (req, res) => {
     })
 })
 
+userRouter.get("/api/getUsers", (req, res) => {
+    console.log("Getting users...")
+    UserModel.find()
+    .then((users)=>{
+        console.log("Found users: ", users)
+        res.status(200).send(users)
+    })
+    .catch((err)=>{
+        console.log("Error while fetching users: ", err)
+        res.status(500).send("Error while fetching users")
+    })
+})
+
 module.exports = userRouter

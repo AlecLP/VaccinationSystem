@@ -28,7 +28,8 @@ let Header = (props) => {
                 {user && user.role === "ADMIN" ? 
                 <>
                     <NavLink to="/vaccines">Vaccines</NavLink> 
-                    <NavLink to="hospital">Hospital</NavLink>
+                    <NavLink to="/hospital">Hospital</NavLink>
+                    <NavLink to="/appointments">Appointments</NavLink>
                 </>
                 : 
                 <></>}

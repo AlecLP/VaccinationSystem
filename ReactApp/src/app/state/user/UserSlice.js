@@ -27,13 +27,30 @@ export const loginUser = createAsyncThunk(
     }
 )
 
+export const getUsers = createAsyncThunk(
+    "user/getUsers",
+    async(_, thunkAPI) => {
+        try{
+            const response = await axios.get("http://localhost:9000/user/api/getUsers")
+            return response.data
+        } catch(err) {
+            const msg = err.response?.data?.message || err.message ||  "User fetch failed: Unknown Error"
+            return thunkAPI.rejectWithValue({ message: msg })
+        }
+    }
+)
+
 const userSlice = createSlice({
     name: "user",
     initialState: {
         user: null,
+        users: null,
         loading: false,
         error: null,
-        message: null
+        message: null,
+        getLoading: false,
+        getError: null,
+        getMessage: null
     },
     reducers: {
         logout(state){
@@ -78,6 +95,21 @@ const userSlice = createSlice({
         .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
+        })
+
+        //Get
+        .addCase(getUsers.pending, (state) => {
+            state.getLoading = true;
+            state.getError = null;
+            state.users = null;
+        })
+        .addCase(getUsers.fulfilled, (state, action) => {
+            state.getLoading = false;
+            state.users = action.payload;
+        })
+        .addCase(getUsers.rejected, (state, action) => {
+            state.getLoading = false;
+            state.getError = action.payload.message;
         });
     }
 })
