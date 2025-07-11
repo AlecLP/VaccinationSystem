@@ -47,13 +47,17 @@ const AppointmentForm = () => {
             <h3 className="text-lg font-semibold text-gray-700">Schedule an Appointment</h3>
 
             <div>
-                <label className="block text-sm mb-1">Patient</label>
+                <label className="relative block text-sm mb-1">Patient</label>
                 <Select
                     options={users?.map(user => ({
                         value: user,
                         label: `${user.firstName} ${user.lastName}`
                     }))}
-                    onChange={opt => setSelectedPatient(opt.value)}
+                    filterOption={(option, inputValue) => {
+                        if (!inputValue) return false;
+                        return option.label.toLowerCase().includes(inputValue.toLowerCase())
+                    }}
+                    onChange={(opt) => setSelectedPatient(opt ? opt.value : null)}
                     placeholder="Search for a patient..."
                     isClearable
                 />
@@ -66,7 +70,11 @@ const AppointmentForm = () => {
                         value: h,
                         label: `${h.name} - ${h.address}`
                     }))}
-                    onChange={opt => setSelectedHospital(opt.value)}
+                    filterOption={(option, inputValue) => {
+                        if (!inputValue) return false;
+                        return option.label.toLowerCase().includes(inputValue.toLowerCase())
+                    }}
+                    onChange={(opt) => setSelectedPatient(opt ? opt.value : null)}
                     placeholder="Search for a hospital..."
                     isClearable
                 />
@@ -79,7 +87,11 @@ const AppointmentForm = () => {
                         value: v,
                         label: `${v.name} (${v.dosesRequired} doses)`
                     }))}
-                    onChange={opt => setSelectedVaccine(opt.value)}
+                    filterOption={(option, inputValue) => {
+                        if (!inputValue) return false;
+                        return option.label.toLowerCase().includes(inputValue.toLowerCase())
+                    }}
+                    onChange={(opt) => setSelectedPatient(opt ? opt.value : null)}
                     placeholder="Search for a vaccine..."
                     isClearable
                 />
@@ -91,7 +103,7 @@ const AppointmentForm = () => {
                     type="date"
                     value={appointmentDate}
                     onChange={(e) => setAppointmentDate(e.target.value)}
-                    className="w-full border px-3 py-2 rounded-md"
+                    className="w-full bg-white border border-gray-300 px-3 py-2 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 text-gray-500"
                 />
             </div>
 

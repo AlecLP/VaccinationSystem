@@ -40,7 +40,7 @@ const HospitalForm = () => {
                     required
                     className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
                     />
-                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
+                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-neutral-50 px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                     Name
                     </span>
                 </label>
@@ -52,7 +52,7 @@ const HospitalForm = () => {
                     required
                     className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
                     />
-                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
+                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-neutral-50 px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                     Address
                     </span>
                 </label>
@@ -64,7 +64,7 @@ const HospitalForm = () => {
                     required
                     className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
                     />
-                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
+                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-neutral-50 px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                     Type
                     </span>
                 </label>
@@ -77,7 +77,7 @@ const HospitalForm = () => {
                     required
                     className="border border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-150 w-full peer"
                     />
-                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-white px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
+                    <span className="absolute left-4 top-0 -translate-y-1/2 scale-100 bg-neutral-50 px-0.5 text-xs font-medium transition-transform peer-focus:scale-0">
                     Charges ($)
                     </span>
                 </label>
