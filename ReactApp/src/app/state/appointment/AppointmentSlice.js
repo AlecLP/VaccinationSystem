@@ -15,7 +15,7 @@ export const scheduleAppointment = createAsyncThunk(
 )
 
 export const getAppointments = createAsyncThunk(
-    "appointent/getAppointments",
+    "appointment/getAppointments",
     async(_, thunkAPI) => {
         try{
             const response = await axios.get("http://localhost:9000/appointment/api/getAppointments")
@@ -23,6 +23,34 @@ export const getAppointments = createAsyncThunk(
         } catch(err) {
             const msg = err.response?.data?.message || err.message ||  "Appointment fetch failed: Unknown Error"
             return thunkAPI.rejectWithValue({ message: msg })
+        }
+    }
+)
+
+export const getAppointmentsByPatient = createAsyncThunk(
+    "appointment/getAppointmentsByPatient",
+    async(patient, {rejectWithValue}) => {
+        try{
+            const response = await axios.get("http://localhost:9000/appointment/api/getAppointmentsByPatient", {
+                params: { patient }
+            })
+            return response.data
+        } catch(err) {
+            const msg = err.response?.data?.message || err.message ||  "Appointment fetch Failed: Unknown Error"
+            return rejectWithValue({ message: msg })
+        }
+    }
+)
+
+export const makeAppointmentPayment = createAsyncThunk(
+    "appointment/makeAppointmentPayment",
+    async({appointmentId}, {rejectWithValue}) => {
+        try{
+            const response = await axios.put("http://localhost:9000/appointment/api/makePayment", {appointmentId})
+            return response.data
+        } catch(err) {
+            const msg = err.response?.data?.message || err.message ||  "Appointment Payment Failed: Unknown Error"
+            return rejectWithValue({ message: msg })
         }
     }
 )
@@ -36,7 +64,10 @@ const appointmentSlice = createSlice({
         scheduleMessage: null,
         getLoading: false,
         getError: null,
-        getMessage: null
+        getMessage: null,
+        paymentLoading: false,
+        paymentMessage: null,
+        paymentError: null
     },
     reducers: {
         
@@ -63,7 +94,7 @@ const appointmentSlice = createSlice({
         .addCase(getAppointments.pending, (state) => {
             state.getLoading = true;
             state.getError = null;
-            state.hospitals = null;
+            state.appointments = null;
         })
         .addCase(getAppointments.fulfilled, (state, action) => {
             state.getLoading = false;
@@ -72,6 +103,36 @@ const appointmentSlice = createSlice({
         .addCase(getAppointments.rejected, (state, action) => {
             state.getLoading = false;
             state.getError = action.payload.message;
+        })
+
+         // Get Appointments By Patient
+         .addCase(getAppointmentsByPatient.pending, (state) => {
+            state.getLoading = true;
+            state.getError = null;
+            state.appointments = null;
+        })
+        .addCase(getAppointmentsByPatient.fulfilled, (state, action) => {
+            state.getLoading = false;
+            state.appointments = action.payload;
+        })
+        .addCase(getAppointmentsByPatient.rejected, (state, action) => {
+            state.getLoading = false;
+            state.getError = action.payload.message;
+        })
+
+         // Make Appointment Payment
+         .addCase(makeAppointmentPayment.pending, (state) => {
+            state.paymentLoading = true;
+            state.paymentError = null;
+            state.paymentMessage = null;
+        })
+        .addCase(makeAppointmentPayment.fulfilled, (state, action) => {
+            state.paymentLoading = false;
+            state.paymentMessage = action.payload.message;
+        })
+        .addCase(makeAppointmentPayment.rejected, (state, action) => {
+            state.paymentLoading = false;
+            state.paymentError = action.payload.message;
         });
     }
 })

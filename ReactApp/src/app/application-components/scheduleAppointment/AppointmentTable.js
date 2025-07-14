@@ -29,8 +29,8 @@ const AppointmentTable = () => {
             <div className="bg-white px-8 py-4 pb-8">
                 <div className="text-center mb-4">
                     {getLoading && <p className="text-gray-500">Loading...</p>}
-                    {getError && <p className="text-green-600">{getError}</p>}
-                    {getMessage && <p className="text-red-600">{getMessage}</p>}
+                    {getMessage && <p className="text-green-600">{getMessage}</p>}
+                    {getError && <p className="text-red-600">{getError}</p>}
                 </div>
 
                 <div className="flex justify-start mb-4">

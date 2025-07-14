@@ -26,6 +26,7 @@ appointmentRouter.get("/api/getAppointments", (req, res) => {
         let appointmentsResponse = []
         for(const appointment of appointments){
             let appResp = {
+                _id: appointment._id,
                 approver: appointment.approver.firstName +" " +appointment.approver.lastName,
                 patient: appointment.patient.firstName +" " +appointment.patient.lastName,
                 hospital: appointment.hospital.name +", at: " +appointment.hospital.address,
@@ -46,17 +47,21 @@ appointmentRouter.get("/api/getAppointments", (req, res) => {
 })
 
 appointmentRouter.get("/api/getAppointmentsByPatient", (req, res) => {
-    const patient = req.body.patient
-    console.log("Getting appointments by patient: " +patient +"...")
-    AppointmentModel.find({"patient._id": patient})
+    const patientId = req.query.patient;
+    if (!patientId) {
+        return res.status(400).send({ message: "Missing patient ID" });
+    }
+    console.log("Getting appointments by patient: " +patientId +"...")
+    AppointmentModel.find({"patient._id": patientId})
     .then((appointments)=>{
         console.log("Found appointments: ", appointments)
         let appointmentsResponse = []
         for(const appointment of appointments){
             let appResp = {
+                _id: appointment._id,
                 approver: appointment.approver.firstName +" " +appointment.approver.lastName,
                 patient: appointment.patient.firstName +" " +appointment.patient.lastName,
-                hospital: appointment.hostpital.name +", at: " +appointment.hospital.address,
+                hospital: appointment.hospital.name +", at: " +appointment.hospital.address,
                 vaccine: appointment.vaccine.name,
                 doses: appointment.vaccine.dosesRequired,
                 appointmentDate: appointment.appointmentDate,
@@ -70,6 +75,28 @@ appointmentRouter.get("/api/getAppointmentsByPatient", (req, res) => {
     .catch((err)=>{
         console.log("Error while fetching appointments: ", err)
         res.status(500).send("Error while fetching appointments")
+    })
+})
+
+appointmentRouter.put("/api/makePayment", (req, res) => {
+    const appointmentId = req.body.appointmentId
+    AppointmentModel.findOne({"_id": appointmentId})
+    .then((appointment) => {
+        if (!appointment) {
+            return res.status(404).send({ message: "Appointment not found." });
+        }
+        appointment.isPaid = true;
+        appointment.save()
+        .then((savedAppointment) => {
+            console.log("Appointment payment successful: ", savedAppointment)
+            return res.status(200).send({message: "Appointment payment successful."})
+        }).catch((err) => {
+            console.log("ERROR: Error making appointment payment: ", err)
+            return res.status(500).send({message: "Error making appointment payment."})
+        })
+    }).catch((err) => {
+        console.log("ERROR: Payment server error: ", err)
+        return res.status(500).send({message: "Error payment server error."})
     })
 })
 

@@ -29,9 +29,15 @@ let Header = (props) => {
                 <>
                     <NavLink to="/vaccines">Vaccines</NavLink> 
                     <NavLink to="/hospital">Hospital</NavLink>
-                    <NavLink to="/appointments">Appointments</NavLink>
+                    <NavLink to="/scheduleAppointments">Appointments</NavLink>
                 </>
                 : 
+                <></>}
+                {user && user.role === "USER" ?
+                <>
+                    <NavLink to="/patientAppointments">Appointments</NavLink>
+                </>
+                :
                 <></>}
             </div>
             <div className="text-lg">

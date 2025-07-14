@@ -8,7 +8,8 @@ import Register from "./application-components/Register"
 import Login from "./application-components/Login"
 import Vaccine from "./application-components/vaccine/Vaccine"
 import Hospital from "./application-components/hospital/Hospital"
-import Appointment from "./application-components/appointment/Appointment"
+import ScheduleAppointment from "./application-components/scheduleAppointment/ScheduleAppointment"
+import PatientAppointments from "./application-components/patientAppointment/PatientAppointments"
 
 export default class ApplicationComponent extends Component {
     constructor(props){
@@ -28,7 +29,8 @@ export default class ApplicationComponent extends Component {
                                 <Route path="/login" element={<Login />}/>
                                 <Route path="/vaccines" element={<Vaccine />}/>
                                 <Route path="/hospital" element={<Hospital />}/>
-                                <Route path="/appointments" element={<Appointment/>}/>
+                                <Route path="/scheduleAppointments" element={<ScheduleAppointment/>}/>
+                                <Route path="/patientAppointments" element={<PatientAppointments/>}/>
                             </Routes>
                         </div>
                     <Footer />
