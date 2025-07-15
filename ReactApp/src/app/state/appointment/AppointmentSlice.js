@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import axios from "axios"
+import { logout } from "../user/UserSlice";
 
 export const scheduleAppointment = createAsyncThunk(
     "appointment/scheduleAppointment",
@@ -133,6 +134,20 @@ const appointmentSlice = createSlice({
         .addCase(makeAppointmentPayment.rejected, (state, action) => {
             state.paymentLoading = false;
             state.paymentError = action.payload.message;
+        })
+
+        //Logout
+        .addCase(logout, (state) => {
+            state.appointments = null;
+            state.getLoading = false;
+            state.getError = null;
+            state.getMessage = null;
+            state.scheduleLoading = false;
+            state.scheduleError = null;
+            state.scheduleMessage = null;
+            state.paymentLoading = false;
+            state.paymentError = null;
+            state.paymentMessage = null;
         });
     }
 })

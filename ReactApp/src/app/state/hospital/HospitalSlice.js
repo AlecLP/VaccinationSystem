@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import axios from "axios"
+import { logout } from "../user/UserSlice";
 
 export const registerHospital = createAsyncThunk(
     "hospital/registerHospital",
@@ -72,7 +73,18 @@ const hospitalSlice = createSlice({
         .addCase(getHospitals.rejected, (state, action) => {
             state.getLoading = false;
             state.getError = action.payload.message;
-        });
+        })
+
+        //Logout
+        .addCase(logout, (state) => {
+            state.hospitals = null
+            state.registerLoading = false
+            state.registerError = null
+            state.registerMessage = null
+            state.getLoading = false
+            state.getError = null
+            state.getMessage = null
+        })
     }
 })
 
