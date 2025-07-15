@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useMemo, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getAppointmentsByPatient, makeAppointmentPayment } from "../../state/appointment/AppointmentSlice"
+import PreviousAppointments from "./PreviousAppointments"
 
 const AppointmentTable = () => {
 
@@ -9,6 +10,17 @@ const AppointmentTable = () => {
     const { user } = useSelector((state) => state.user)
     const patient = user._id
     const [showForm, setShowForm] = useState(false)
+
+    const filteredAppointments = useMemo(() => {
+        const today = new Date()
+        today.setHours(0, 0, 0, 0)
+    
+        return appointments?.filter(appointment => {
+            const date = new Date(appointment.appointmentDate)
+            date.setHours(0, 0, 0, 0)
+            return date >= today;
+        })
+    }, [appointments])
 
     const toggleForm = () => {
         setShowForm(prev => !prev);
@@ -44,7 +56,7 @@ const AppointmentTable = () => {
                     {getError && <p className="text-red-600">{getError}</p>}
                 </div>
 
-                {appointments && appointments.length > 0 ? (
+                {filteredAppointments && filteredAppointments.length > 0 ? (
                 <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
                         <thead className="bg-gray-100 text-gray-700">
@@ -61,7 +73,7 @@ const AppointmentTable = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {appointments.map((appointment, idx) => (
+                            {filteredAppointments.map((appointment, idx) => (
                             <tr key={idx} className="hover:bg-gray-50">
                                 <td className="px-4 py-3">{appointment.approver}</td>
                                 <td className="px-4 py-3">{appointment.patient}</td>
@@ -105,7 +117,7 @@ const AppointmentTable = () => {
 
                 {showForm && (
                 <div className="mb-6 border border-gray-300 rounded-xl p-4 bg-gray-50">
-                    PREVIOUS APPOINTMENTS
+                    <PreviousAppointments/>
                 </div>
                 )}
             </div>
