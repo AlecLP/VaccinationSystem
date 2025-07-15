@@ -26,7 +26,10 @@ const AppointmentForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (!selectedPatient || !selectedHospital || !selectedVaccine || !appointmentDate) return;
+        if (!selectedPatient || !selectedHospital || !selectedVaccine || !appointmentDate) {
+            console.log("Missing fields in appointment.")
+            return;
+        }
 
         const appointment = {
             approver: user,
@@ -74,7 +77,7 @@ const AppointmentForm = () => {
                         if (!inputValue) return false;
                         return option.label.toLowerCase().includes(inputValue.toLowerCase())
                     }}
-                    onChange={(opt) => setSelectedPatient(opt ? opt.value : null)}
+                    onChange={(opt) => setSelectedHospital(opt ? opt.value : null)}
                     placeholder="Search for a hospital..."
                     isClearable
                 />
@@ -91,7 +94,7 @@ const AppointmentForm = () => {
                         if (!inputValue) return false;
                         return option.label.toLowerCase().includes(inputValue.toLowerCase())
                     }}
-                    onChange={(opt) => setSelectedPatient(opt ? opt.value : null)}
+                    onChange={(opt) => setSelectedVaccine(opt ? opt.value : null)}
                     placeholder="Search for a vaccine..."
                     isClearable
                 />
