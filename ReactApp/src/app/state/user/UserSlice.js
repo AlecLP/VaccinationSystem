@@ -57,6 +57,7 @@ const userSlice = createSlice({
             state.user = null
             state.error = null
             state.message = null
+            state.users = null
         },
         clearMessages(state) {
             state.message = null;
