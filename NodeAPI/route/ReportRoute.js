@@ -4,6 +4,7 @@ let reportRouter = expressObj.Router({})
 let AppointmentModel = require("../data-model/AppointmentDataModel")
 
 reportRouter.get("/api/reports/age-distribution", async (req, res) => {
+    console.log("Getting reports by age distribution")
     try {
       const currentDate = new Date();
       /*
@@ -55,7 +56,7 @@ reportRouter.get("/api/reports/age-distribution", async (req, res) => {
         else if (age === 51) formattedResults[3].count = result.count;
         else if (age === 66) formattedResults[4].count = result.count;
       });
-  
+      console.log("Reports found: ", formattedResults)
       res.status(200).json(formattedResults);
     } catch (err) {
       console.error(err);

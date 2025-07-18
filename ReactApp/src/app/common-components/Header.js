@@ -39,6 +39,7 @@ let Header = (props) => {
                 </>
                 :
                 <></>}
+                <NavLink to="/reports">Reports</NavLink>
             </div>
             <div className="text-lg">
                 {!user ? 

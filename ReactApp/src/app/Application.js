@@ -10,6 +10,7 @@ import Vaccine from "./application-components/vaccine/Vaccine"
 import Hospital from "./application-components/hospital/Hospital"
 import ScheduleAppointment from "./application-components/scheduleAppointment/ScheduleAppointment"
 import PatientAppointments from "./application-components/patientAppointment/PatientAppointments"
+import Reports from "./application-components/report/Reports"
 
 export default class ApplicationComponent extends Component {
     constructor(props){
@@ -31,6 +32,7 @@ export default class ApplicationComponent extends Component {
                                 <Route path="/hospital" element={<Hospital />}/>
                                 <Route path="/scheduleAppointments" element={<ScheduleAppointment/>}/>
                                 <Route path="/patientAppointments" element={<PatientAppointments/>}/>
+                                <Route path="/reports" element={<Reports/>}/>
                             </Routes>
                         </div>
                     <Footer />
