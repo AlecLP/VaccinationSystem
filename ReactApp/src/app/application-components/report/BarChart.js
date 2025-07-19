@@ -44,7 +44,7 @@ const BarChart = ({
         // X scale
         const x = d3
         .scaleBand()
-        .domain(data.map(d => d.ageGroup))
+        .domain(data.map(d => d.label))
         .range([0, innerWidth])
         .padding(0.1);
 
@@ -60,8 +60,7 @@ const BarChart = ({
         .attr("transform", `translate(0,${innerHeight})`)
         .call(d3.axisBottom(x))
         .selectAll("text")
-        .attr("transform", "rotate(-40)")
-        .style("text-anchor", "end");
+        .style("text-anchor", "middle");
 
         // Y axis
         const yAxis = d3.axisLeft(y)
@@ -74,7 +73,7 @@ const BarChart = ({
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", d => x(d.ageGroup))
+        .attr("x", d => x(d.label))
         .attr("y", d => y(d.count))
         .attr("width", x.bandwidth())
         .attr("height", d => innerHeight - y(d.count))

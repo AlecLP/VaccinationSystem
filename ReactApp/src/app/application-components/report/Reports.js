@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BarChart from "./BarChart";
+import PieChart from "./PieChart";
 
 const ReportsPage = () => {
   const [report, setReport] = useState("age");
@@ -7,21 +8,27 @@ const ReportsPage = () => {
   const reportsMap = {
     age: {
       endpoint: "http://localhost:9000/report/api/reports/age-distribution",
-      title: "Vaccinated Users by Age Group",
+      title: "Vaccinated Patients by Age Group",
       xLabel: "Age Group",
-      yLabel: "Users"
+      yLabel: "Patients"
     },
     gender: {
       endpoint: "http://localhost:9000/report/api/reports/gender-distribution",
-      title: "Vaccinated Users by Gender",
+      title: "Vaccinated Patients by Gender",
       xLabel: "Gender",
-      yLabel: "Users"
+      yLabel: "Patients"
     },
     disease: {
       endpoint: "http://localhost:9000/report/api/reports/disease-distribution",
-      title: "Vaccinated Users with Pre-existing Conditions",
+      title: "Vaccinated Patients by Pre-existing Conditions",
       xLabel: "Condition",
-      yLabel: "Users"
+      yLabel: "Patients"
+    },
+    practicioner: {
+      endpoint: "http://localhost:9000/report/api/reports/practicioner-distribution",
+      title: "Vaccinated Patients by Practicioner",
+      xLabel: "Practicioner",
+      yLabel: "Patients"
     }
   };
 
@@ -29,7 +36,7 @@ const ReportsPage = () => {
 
   return (
     <div className="h-auto w-full py-10 bg-neutral-100 flex justify-center items-center rounded-4xl">
-        <div className="w-full max-w-5xl rounded-3xl overflow-hidden shadow-md bg-white">
+        <div className="w-full mx-7 rounded-3xl overflow-hidden shadow-md bg-white">
             <div className="bg-red-700 text-white text-center py-4">
                 <h2 className="text-2xl font-semibold">Reports</h2>
             </div>
@@ -53,9 +60,15 @@ const ReportsPage = () => {
                 >
                     Disease
                 </button>
+                <button
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl transition"
+                    onClick={() => setReport("practicioner")}
+                >
+                    Practicioner
+                </button>
             </div>
 
-            <div className="flex justify-center overflow-x-auto px-4">
+            <div className="flex items-center justify-center overflow-x-auto px-4 mb-4 gap-56">
                 <BarChart
                     endpoint={endpoint}
                     title={title}
@@ -64,6 +77,12 @@ const ReportsPage = () => {
                     width={800}
                     height={450}
                     barColor="#b91c1c"
+                />
+                <PieChart
+                  endpoint={endpoint}
+                  title={title}
+                  width={400}
+                  height={400}
                 />
             </div>
         </div>

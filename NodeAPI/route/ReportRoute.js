@@ -41,11 +41,11 @@ reportRouter.get("/api/reports/age-distribution", async (req, res) => {
       const rawResults = await AppointmentModel.aggregate(pipeline);
   
       const formattedResults = [
-        { ageGroup: "0-18", count: 0 },
-        { ageGroup: "19-30", count: 0 },
-        { ageGroup: "31-50", count: 0 },
-        { ageGroup: "51-65", count: 0 },
-        { ageGroup: "66+", count: 0 }
+        { label: "0-18", count: 0 },
+        { label: "19-30", count: 0 },
+        { label: "31-50", count: 0 },
+        { label: "51-65", count: 0 },
+        { label: "66+", count: 0 }
       ];
   
       rawResults.forEach(result => {
@@ -63,5 +63,106 @@ reportRouter.get("/api/reports/age-distribution", async (req, res) => {
       res.status(500).json({ error: "Server Error" });
     }
 }); 
+
+reportRouter.get("/api/reports/gender-distribution", async (req, res) => {
+  console.log("Getting reports by gender")
+  try {
+    const result = await AppointmentModel.aggregate([
+      {
+        $match: {
+          isPaid: true,
+          appointmentDate: { $lte: new Date() },
+        },
+      },
+      {
+        $group: {
+          _id: "$patient.gender",
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          label: "$_id",
+          count: 1,
+          _id: 0,
+        },
+      },
+    ]);
+    result.sort((a, b) => a.label.localeCompare(b.label))
+    console.log("Reports found: ", result)
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+reportRouter.get("/api/reports/disease-distribution", async (req, res) => {
+  console.log("Getting reports by disease")
+  try {
+    const result = await AppointmentModel.aggregate([
+      {
+        $match: {
+          isPaid: true,
+          appointmentDate: { $lte: new Date() },
+        },
+      },
+      {
+        $group: {
+          _id: "$patient.diseaseInfo",
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          label: "$_id",
+          count: 1,
+          _id: 0,
+        },
+      },
+    ]);
+    result.sort((a, b) => a.label.localeCompare(b.label))
+    console.log("Reports found: ", result)
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+reportRouter.get("/api/reports/practicioner-distribution", async (req, res) => {
+  console.log("Getting reports by practicioner")
+  try {
+    const result = await AppointmentModel.aggregate([
+      {
+        $match: {
+          isPaid: true,
+          appointmentDate: { $lte: new Date() },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $concat: ["$approver.firstName", " ", "$approver.lastName"]
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          label: "$_id",
+          count: 1,
+          _id: 0,
+        },
+      },
+    ]);
+    result.sort((a, b) => a.label.localeCompare(b.label))
+    console.log("Reports found: ", result)
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 module.exports = reportRouter;
