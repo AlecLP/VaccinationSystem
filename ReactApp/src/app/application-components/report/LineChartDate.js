@@ -48,7 +48,7 @@ const LineChart = ({
 
     const allDates = d3.timeDay.range(
       d3.min(formattedData, d => d.date),
-      d3.max(formattedData, d => d.date),
+      d3.timeDay.offset(d3.max(formattedData, d => d.date), 1),
       1
     );
     

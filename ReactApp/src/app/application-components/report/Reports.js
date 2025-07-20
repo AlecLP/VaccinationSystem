@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BarChart from "./BarChart";
 import PieChart from "./PieChart";
-import LineChart from "./LineChart";
+import LineChart from "./LineChartDate";
 
 const ReportsPage = () => {
   const [report, setReport] = useState("age");
