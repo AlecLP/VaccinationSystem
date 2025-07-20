@@ -165,4 +165,49 @@ reportRouter.get("/api/reports/practicioner-distribution", async (req, res) => {
   }
 });
 
+reportRouter.get("/api/reports/doses-per-day", async (req, res) => {
+  console.log("Getting reports of doses per day")
+  try {
+    const result = await AppointmentModel.aggregate([
+      {
+        $match: {
+          isPaid: true,
+          appointmentDate: {
+            $gte: new Date(new Date().setDate(new Date().getDate() - 14)),
+            $lte: new Date()
+          }
+        }        
+      },
+      {
+        $addFields: {
+          dateOnly: {
+            $dateToString: { format: "%Y-%m-%d", date: "$appointmentDate" },
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$dateOnly",
+          count: { $sum: "$vaccine.dosesRequired" },
+        },
+      },
+      {
+        $project: {
+          label: "$_id",
+          count: 1,
+          _id: 0,
+        },
+      },
+      {
+        $sort: { label: 1 },
+      },
+    ]);
+    console.log("Reports found: ", result)
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 module.exports = reportRouter;

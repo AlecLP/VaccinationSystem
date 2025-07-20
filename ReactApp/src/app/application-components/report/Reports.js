@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BarChart from "./BarChart";
 import PieChart from "./PieChart";
+import LineChart from "./LineChart";
 
 const ReportsPage = () => {
   const [report, setReport] = useState("age");
@@ -29,6 +30,12 @@ const ReportsPage = () => {
       title: "Vaccinated Patients by Practicioner",
       xLabel: "Practicioner",
       yLabel: "Patients"
+    },
+    doses: {
+      endpoint: "http://localhost:9000/report/api/reports/doses-per-day",
+      title: "# of Doses Per Day",
+      xLabel: "Date",
+      yLabel: "Doses"
     }
   };
 
@@ -66,24 +73,43 @@ const ReportsPage = () => {
                 >
                     Practicioner
                 </button>
+                <button
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl transition"
+                    onClick={() => setReport("doses")}
+                >
+                    Doses Per Day
+                </button>
             </div>
 
             <div className="flex items-center justify-center overflow-x-auto px-4 mb-4 gap-56">
-                <BarChart
-                    endpoint={endpoint}
-                    title={title}
-                    xLabel={xLabel}
-                    yLabel={yLabel}
-                    width={800}
-                    height={450}
-                    barColor="#b91c1c"
-                />
-                <PieChart
+                {report === "doses" ? 
+                  <LineChart
                   endpoint={endpoint}
                   title={title}
-                  width={400}
-                  height={400}
-                />
+                  xLabel={xLabel}
+                  yLabel={yLabel}
+                  width={1000}
+                  height={450}
+                  lineColor="#16a34a"
+                />                
+                :<>
+                  <BarChart
+                      endpoint={endpoint}
+                      title={title}
+                      xLabel={xLabel}
+                      yLabel={yLabel}
+                      width={800}
+                      height={450}
+                      barColor="#b91c1c"
+                  />
+                  <PieChart
+                    endpoint={endpoint}
+                    title={title}
+                    width={400}
+                    height={400}
+                  />
+                </>
+                }
             </div>
         </div>
     </div>
