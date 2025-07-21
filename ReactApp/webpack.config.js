@@ -21,7 +21,7 @@ config = {
             },
             {
                 test: /\.css$/,
-                exclude: /node_modules/,
+                exclude: /node_modules\/(?!slick-carousel)/,
                 use: ['style-loader', 'css-loader', 'postcss-loader']
             },
             {

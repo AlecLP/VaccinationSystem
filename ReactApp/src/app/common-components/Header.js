@@ -30,6 +30,7 @@ let Header = (props) => {
                     <NavLink to="/vaccines">Vaccines</NavLink> 
                     <NavLink to="/hospital">Hospital</NavLink>
                     <NavLink to="/scheduleAppointments">Appointments</NavLink>
+                    <NavLink to="/reports">Reports</NavLink>
                 </>
                 : 
                 <></>}
@@ -38,8 +39,7 @@ let Header = (props) => {
                     <NavLink to="/patientAppointments">Appointments</NavLink>
                 </>
                 :
-                <></>}
-                <NavLink to="/reports">Reports</NavLink>
+                <></>} 
             </div>
             <div className="text-lg">
                 {!user ? 
