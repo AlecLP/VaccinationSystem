@@ -1,4 +1,7 @@
 let expressObj = require("express")
+const PDFDocument = require("pdfkit")
+const fs = require('fs')
+const path = require('path');
 let appointmentRouter = expressObj.Router({})
 
 let AppointmentModel = require("../data-model/AppointmentDataModel")
@@ -86,6 +89,35 @@ appointmentRouter.put("/api/makePayment", (req, res) => {
             return res.status(404).send({ message: "Appointment not found." });
         }
         appointment.isPaid = true;
+
+        const doc = new PDFDocument();
+        
+        const pdfDir = path.join(__dirname, '../pdfs');
+        fs.mkdirSync(pdfDir, { recursive: true });
+
+        const pdfPath = path.join(pdfDir, `${appointment._id}.pdf`);
+        doc.pipe(fs.createWriteStream(pdfPath));
+
+        //Header
+        doc.rect(0, 0, doc.page.width, 80)
+            .fill("#b91c1c")
+        doc.fillColor("white")
+            .fontSize(24)
+            .text("ImmunoSuite Appointment Certificate", 50, 25)
+
+        //Body
+        doc.fillColor("black")
+        doc.fontSize(12)
+            .text(`Patient: ${appointment.patient.firstName} ${appointment.patient.lastName}`, 50, 100)
+            .text(`Doctor: ${appointment.approver.firstName} ${appointment.approver.lastName}`)
+            .text(`Hospital: ${appointment.hospital.name} at ${appointment.hospital.address}`)
+            .text(`Vaccine: ${appointment.vaccine.name}`)
+            .text(`Doses: ${appointment.vaccine.dosesRequired}`)
+            .text(`Date: ${appointment.appointmentDate.toDateString()}`)
+            .text(`Cost: $${appointment.charge.toFixed(2)}`)
+
+        doc.end()
+
         appointment.save()
         .then((savedAppointment) => {
             console.log("Appointment payment successful: ", savedAppointment)
