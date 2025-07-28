@@ -132,4 +132,21 @@ appointmentRouter.put("/api/makePayment", (req, res) => {
     })
 })
 
+appointmentRouter.get("/download/:id", (req, res) => {
+    const {id} = req.params
+
+    const pdfPath = path.join(__dirname, '../pdfs', `${id}.pdf`)
+
+    if(!fs.existsSync(pdfPath)){
+        return res.status(404).json({message: "PDF not found for requested appointment."})
+    }
+
+    res.download(pdfPath, `Appointment_${id}.pdf`, (err) => {
+        if(err){
+            console.log("Download error: ", err)
+            res.status(500).json({message: "Error sending pdf"})
+        }
+    })
+})
+
 module.exports = appointmentRouter

@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import axios from 'axios'
 import { getAppointmentsByPatient, makeAppointmentPayment } from "../../state/appointment/AppointmentSlice"
 import PreviousAppointments from "./PreviousAppointments"
 
@@ -36,6 +37,23 @@ const AppointmentTable = () => {
         }
     };
 
+    function downloadPDF(appointmentId){
+        axios.get(`http://localhost:9000/appointment/download/${appointmentId}`, {
+            responseType: 'blob'
+        }).then((res) => {
+            const url = window.URL.createObjectURL(new Blob([res.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `Appointment_${appointmentId}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        }).catch((err) => {
+            console.error('Download failed', err);
+            alert("PDF download failed: ", err)
+        });
+    }
+
     useEffect(() => {
         if(appointments === null){ 
             dispatch(getAppointmentsByPatient(patient))
@@ -70,6 +88,7 @@ const AppointmentTable = () => {
                             <th className="px-4 py-3">Charges ($)</th>
                             <th className="px-4 py-3">Paid</th>
                             <th className="px-4 py-3">Action</th>
+                            <th className="px-4 py-3">Certificate</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
@@ -93,6 +112,20 @@ const AppointmentTable = () => {
                                         </button>
                                         :
                                         <></>
+                                    }
+                                </td>
+                                <td className="px-4 py-3">
+                                    {appointment.isPaid ? 
+                                        <button
+                                            onClick={() => downloadPDF(appointment._id)}
+                                            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl transition"
+                                        >
+                                            Download
+                                        </button>
+                                        :
+                                        <>
+                                            <p>N/A</p>
+                                        </>
                                     }
                                 </td>
                             </tr>
